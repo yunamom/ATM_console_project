@@ -1,68 +1,115 @@
 package model;
 
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class BankAccount {
 //DTO (Data Transfer Object)
 
 	public static Map<Integer, BankAccount> bankMap = new HashMap<Integer, BankAccount>();
 
-	private int accountNumber; // 계좌번호
-	private int accountPass; // 계좌 비밀번호
-	private String userName; // 회원 이름
-	private int balance; // 계좌 금액
-
-	public BankAccount(int accountNumber, int accountPass, String userName) {
+	public int accountNumber; // 계좌번호 - 랜덤
+	public String userName; // 회원 이름
+	public int balance; // 계좌 금액
+	
+	public BankAccount(int accountNumber, String userName, int balance) {
+		// 로그인한 회원의 계좌 인스턴스를 생성할 때 필요한 값
 		this.accountNumber = accountNumber;
-		this.accountPass = accountPass;
 		this.userName = userName;
+		this.balance = balance;
+	}
+	public BankAccount(){}
+	
+	public void getBankFile() {
+		String path = "bank.txt";
+		
+		try {
+			Scanner scanFile = new Scanner(new FileReader(path));
+			
+			while(scanFile.hasNext()) {
+				String[] line = scanFile.nextLine().split("@");
+				accountNumber = Integer.parseInt(line[0]);
+				userName = line[1];
+				balance = Integer.parseInt(line[2]);
+				
+				BankAccount bank = new BankAccount(accountNumber,userName,balance);
+				bankMap.put(accountNumber,bank);			
+				
+			}
+			scanFile.close();
+		}catch(Exception e) {
+		}
+	}
+	
+	public void setBankFile() {
+		try (
+				/*	이곳에 객체를 생성하면 try 종료 후 자동으로 close 처리가 됩니다.
+				 *  true : 기존 파일에 이어서 작성 (default는 false 입니다.) - 덮어씌기가 됨
+				 */
+				FileWriter f_writer = new FileWriter("bank.txt",true);
+				BufferedWriter userWriter = new BufferedWriter( f_writer);
+				
+				)
+		{
+				userWriter.write(String.format("%d@%s@%d\n",accountNumber,userName,balance));	
+				userWriter.flush(); //버퍼의 내용을 파일에 쓰기
+			
+		} catch ( IOException e) {
+			System.out.println(e);
+		}
+		
 	}
 
+	
 	public static Map<Integer, BankAccount> getBankMap() {
 		return bankMap;
 	}
+
 
 	public static void setBankMap(Map<Integer, BankAccount> bankMap) {
 		BankAccount.bankMap = bankMap;
 	}
 
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
 
 	public int getAccountNumber() {
 		return accountNumber;
 	}
 
+
 	public void setAccountNumber(int accountNumber) {
 		this.accountNumber = accountNumber;
 	}
 
-	public int getAccountPass() {
-		return accountPass;
+
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setAccountPass(int accountPass) {
-		this.accountPass = accountPass;
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
+
 
 	public int getBalance() {
 		return balance;
 	}
 
+
 	public void setBalance(int balance) {
 		this.balance = balance;
 	}
 
+
 	// to String()
 	public String toString() {
 
-		return accountNumber + "   " + userName;
+		return "계좌번호 : "+accountNumber + "\n잔액 : " + balance + "원";
 
 	}
 }
