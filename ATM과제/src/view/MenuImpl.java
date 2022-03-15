@@ -20,8 +20,7 @@ public class MenuImpl implements Menu {
 			menu = new MenuImpl();
 		}		
 		return menu;
-	}
-	
+	}	
 	
 	@Override
 	public void init() {
@@ -43,11 +42,13 @@ public class MenuImpl implements Menu {
 		System.out.println("  ┃                 *");
 		System.out.println("  ┃ 1) 로그인");
 		System.out.println("  ┃ 2) 회원가입");
+		System.out.println("  ┃ 3) 회원목록");
 		System.out.println("  ┃ 0) 종료하기");
+		System.out.println("  ┃     ");
+		System.out.print("  ┃ 메뉴 입력 : ");
+		String menu = scan.next();
 		System.out.println("  ┃                 *");
 		System.out.println("  ┗━━━━━━━━━━━━━━━━━┛\n");
-		  System.out.print("메뉴 입력 : ");
-		String menu = scan.next();
 		
 			switch(menu) {
 			
@@ -59,19 +60,23 @@ public class MenuImpl implements Menu {
 				userJoin.userJoin();
 				break;
 				
+			case ("3"):
+				userJoin.userList();
+				break;
+				
 			case ("0"): 
-				System.out.println("종료 합니다.");	
+				System.out.println("Good Bye *");	
 				System.exit(0);return;
 				
 			default:
-				System.out.println("다시 입력해주세요.");
+				System.out.println("다시 입력해주세요 :)");
 			}	
 		}
 	}
 	@Override
 	public void userView() {
-			Boolean check = true;
-			while(check) {
+			userImpl.init();
+			while(true) {
 			System.out.println("");
 			System.out.println("  ┏━━━━* Bank U ━━━━┓");
 			System.out.println("  ┃                 *");
@@ -79,11 +84,13 @@ public class MenuImpl implements Menu {
 			System.out.println("  ┃ 2) 입금 ");
 			System.out.println("  ┃ 3) 출금 ");
 			System.out.println("  ┃ 4) 계좌이체");
+			System.out.println("  ┃ 5) 통장정리");
 			System.out.println("  ┃ 0) 로그아웃");
+			System.out.println("  ┃     ");
+			System.out.print("  ┃ 메뉴 입력 : ");
+			String menu = scan.next();
 			System.out.println("  ┃                 *");
 			System.out.println("  ┗━━━━━━━━━━━━━━━━━┛\n");
-			  System.out.print("메뉴 입력 : ");
-			String menu = scan.next();
 			
 			switch(menu) {
 				
@@ -103,9 +110,13 @@ public class MenuImpl implements Menu {
 				userImpl.userTransfer();
 				break;
 				
+			case ("5"):
+				userImpl.userHistory();
+				break;
+				
 			case ("0"): 
 				System.out.println("로그아웃 합니다.");
-				check = false;
+				loginMenu();
 				break;
 				
 			default:

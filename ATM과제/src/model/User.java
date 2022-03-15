@@ -15,10 +15,9 @@ public class User {
 	public static Map<String, User> userMap = new HashMap<String, User>();
 	
 	private String userId; // 아이디
-	private int accountNumber; // 계좌번호 - random 번호
+	private int accountNumber; // 계좌번호
 	private String userPw; // 비번
 	private String userName; // 이름
-	public int balance; // 계좌 금액
 
 	public User(String userId, int accountNumber, String userPw, String userName) {
 		this.userId = userId;
@@ -112,7 +111,19 @@ public class User {
 	// to String()
 	public String toString() {
 		
-		return userName + "님 회원가입을 축하합니다.\n" + "계좌번호 : " + accountNumber;
+		return "  ┃ " + userName + "님 회원가입을 축하합니다 :)\n" + "  ┃ 계좌번호 : " + accountNumber;
 
-		}
+	}
+
+	public String toList() {
+		String list ="  ┏━━━*User List━━━━┓";
+		       list+="\n  ┃ ";
+		       list+="\n  ┃ Id : "+ userId;
+		       list+="\n  ┃ Pw : "+ userPw;
+		       list+="\n  ┃ Ac : "+ accountNumber;
+		       list+="\n  ┃                 *";
+		       list+="\n  ┗━━━━━━━━━━━━━━━━━┛\n";
+		    
+		return list;
+	}
 }

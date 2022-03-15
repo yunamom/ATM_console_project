@@ -13,15 +13,17 @@ public class BankAccount {
 
 	public static Map<Integer, BankAccount> bankMap = new HashMap<Integer, BankAccount>();
 
-	public int accountNumber; // 계좌번호 - 랜덤
-	public String userName; // 회원 이름
+	public int accountNumber; // 계좌번호
+	public String userName; // 받는사람
 	public int balance; // 계좌 금액
+	public String setName; // 보내는사람 (계좌이체)
 	
-	public BankAccount(int accountNumber, String userName, int balance) {
+	public BankAccount(int accountNumber, String userName, int balance, String setName) {
 		// 로그인한 회원의 계좌 인스턴스를 생성할 때 필요한 값
 		this.accountNumber = accountNumber;
 		this.userName = userName;
 		this.balance = balance;
+		this.setName = setName;
 	}
 	public BankAccount(){}
 	
@@ -35,14 +37,15 @@ public class BankAccount {
 				String[] line = scanFile.nextLine().split("@");
 				accountNumber = Integer.parseInt(line[0]);
 				userName = line[1];
-				balance = Integer.parseInt(line[2]);
-				
-				BankAccount bank = new BankAccount(accountNumber,userName,balance);
+				balance = Integer.parseInt(line[2]);	
+				setName = line[3];
+				BankAccount bank = new BankAccount(accountNumber,userName,balance,setName);
 				bankMap.put(accountNumber,bank);			
 				
 			}
 			scanFile.close();
 		}catch(Exception e) {
+			System.out.println(e);
 		}
 	}
 	
@@ -56,15 +59,14 @@ public class BankAccount {
 				
 				)
 		{
-				userWriter.write(String.format("%d@%s@%d\n",accountNumber,userName,balance));	
+				userWriter.write(String.format("%d@%s@%d@%s\n",accountNumber,userName,balance,setName));	
 				userWriter.flush(); //버퍼의 내용을 파일에 쓰기
+				
 			
 		} catch ( IOException e) {
 			System.out.println(e);
 		}
-		
 	}
-
 	
 	public static Map<Integer, BankAccount> getBankMap() {
 		return bankMap;
@@ -105,11 +107,18 @@ public class BankAccount {
 		this.balance = balance;
 	}
 
+	public String getSetName() {
+		return userName;
+	}
+
+
+	public void setSetName(String setName) {
+		this.setName = setName;
+	}
 
 	// to String()
 	public String toString() {
-
-		return "계좌번호 : "+accountNumber + "\n잔액 : " + balance + "원";
+		return "계좌번호 : "+accountNumber + "\n이름 : "+userName+"\n잔액 : " + balance + "원";
 
 	}
 }
