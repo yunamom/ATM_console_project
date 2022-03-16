@@ -49,7 +49,7 @@ public static UserJoin_Impl userJoin = new UserJoin_Impl();
 
 	@Override
 	public void userWithdraw() {
-		System.out.println(userId);
+		
 		System.out.print("출금하실 금액을 입력 [취소:0] :");
 		try {
 		int money = MenuImpl.scan.nextInt();
