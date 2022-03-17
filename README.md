@@ -1,4 +1,7 @@
 # Java ATM 💰
+[https://yunamom.tistory.com/44](https://yunamom.tistory.com/44 "ATM 콘솔 프로그램")
+
+
 시작 화면
 
 <img width="426" alt="Screen Shot 2022-03-16 at 10 55 29 AM" src="https://user-images.githubusercontent.com/91236026/158501533-675ef720-bfda-4680-8fbb-4047d3e79fda.png">
