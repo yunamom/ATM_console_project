@@ -1,6 +1,6 @@
 # Java ATM 💰
-[https://yunamom.tistory.com/44](https://yunamom.tistory.com/44 "ATM 콘솔 프로그램")
-
+👩🏻‍💻진행과정 : [https://yunamom.tistory.com/44](https://yunamom.tistory.com/44 "ATM 콘솔 프로그램") <br>
+▶️실행영상 : https://yunamom.tistory.com/50
 
 시작 화면
 
